@@ -1,0 +1,33 @@
+﻿@using DCartWeb.Models.Products
+@model IEnumerable<SubCategory>
+
+
+    <div class="row pb-3">
+	@foreach(var subCategory in Model)
+	{
+		<div class="col-lg-3 col-md-6">
+			<div class="row p-2">
+				<div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
+					<div class="card">
+						@*<img src="@subCategory.ImageUrl" class="card-img-top rounded"/>*@
+
+						<div class="card-body">
+						<div class="pl-1">
+							<p class="card-title h5 text-primary">@subCategory.Name</p>
+							<p class="card-title text-info">by <b>@subCategory.DateAdded</b></p>
+						</div>
+						<div class="pl-1">
+							<p>Date Updated: <b>$@subCategory.DateUpdated</b></p>
+						</div>
+						</div>
+					</div>
+					<div>
+						<a asp-action="Product" class="btn btn-primary form-control" asp-route-id="@subCategory.Id">
+							Details
+						</a>
+					</div>
+				</div> 
+			</div>
+		</div>
+	}
+</div>

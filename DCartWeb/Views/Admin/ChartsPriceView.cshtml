@@ -1,0 +1,7 @@
+﻿@using DCartWeb.Models.Orders
+@model decimal
+
+<div id="chartContainer" onload="Price()" style="height: 400px; width: 60%;"></div>
+<p>Total Amount Bought For: @Model.ToString("c")</p>
+
+<script src="/js/ChartsPrice.js"></script>

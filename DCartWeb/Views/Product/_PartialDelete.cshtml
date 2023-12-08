@@ -1,0 +1,49 @@
+﻿@using DCartWeb.Models.Products
+@model Product
+
+
+
+@{
+    Layout = "";
+}
+
+@*<form method="post" asp-action="Delete">*@
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Product</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+        <div class="mb-3">
+            <label asp-for="ProductName"></label>
+            <input asp-for="ProductName" disabled class="form-control" />
+        </div>
+        @if (@Model.PosterImageUrl != null)
+        {
+            <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="/@Model.PosterImageUrl">
+        }
+        else
+        {
+            <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="" alt="No Image">
+
+        }
+        <div class="mb-3">
+            <label asp-for="DateAdded"></label>
+            <input asp-for="DateAdded" disabled class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DateUpdated"></label>
+            <input asp-for="DateUpdated" disabled class="form-control" />
+        </div>
+        <button type="submit" onclick="FormDelete(@Model.Id)" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
+
+
+<script src="/js/Products.js"></script>

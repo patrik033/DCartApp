@@ -1,0 +1,16 @@
+﻿@using DCartWeb.Models.Orders
+@model int
+
+<hr />
+
+
+<button onclick="Doughnut()">Doughnut</button>
+<button onclick="Line()">Line</button>
+<button onclick="SplineArea()">Spline area</button>
+
+<div id="chartContainer" onload="First()" style="height: 400px; width: 60%;"></div>
+<p>Number Of Products Bought: @Model</p>
+
+
+<script src="/js/Charts.js"></script>
+

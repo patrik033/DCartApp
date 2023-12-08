@@ -1,0 +1,86 @@
+﻿@using DCartWeb.Models.Products
+@using DCartWeb.Models.ViewModels
+@model ProductViewModel
+
+
+@{
+    Layout = "";
+}
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data" >
+
+    <input asp-for="Subs.Id" type="hidden" />
+    <input asp-for="Subs.DateAdded" type="hidden" value="@Model.Subs.DateAdded"/>
+    <input asp-for="Subs.DateUpdated" type="hidden" value="@DateTime.UtcNow" />
+    <input asp-for="Subs.PosterImageUrl" type="hidden" />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Update Product</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Subs.ProductName"></label>
+            <input asp-for="Subs.ProductName" class="form-control" id="productName" />
+            <span asp-validation-for="Subs.ProductName" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="col-4 col-lg-3 offset-lg-1 ">
+
+            @if (@Model.Subs.PosterImageUrl != null)
+            {
+                <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="/@Model.Subs.PosterImageUrl">
+            }
+            else
+            {
+                <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="" alt="No Image">
+
+            }
+        </div>
+        <div class="mb-3">
+            <label asp-for="Subs.PosterImageUrl"></label>
+            <input asp-for="Subs.PosterImageUrl" type="file" class="form-control" id="files" value="@Model.Subs.PosterImageUrl" />
+            <span asp-validation-for="Subs.PosterImageUrl" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Subs.ProductPrice"></label>
+            <input asp-for="Subs.ProductPrice" step="0.01" id="productPrice" class="form-control" />
+            <span asp-validation-for="Subs.ProductPrice" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.QuantityInStock"></label>
+            <input asp-for="Subs.QuantityInStock" type="number" id="quantityInStock" class="form-control" />
+            <span asp-validation-for="Subs.QuantityInStock" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.IsFeatured"></label>
+            <input type="checkbox" id="featured" asp-for="Subs.IsFeatured" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.SubCategoryId"></label>
+            <select asp-for="Subs.SubCategoryId" id="subId" asp-items="Model.MainCategoryItems" class="form-select">
+                <option disabled selected>-Select Category-</option>
+            </select>
+        </div>
+
+
+
+
+
+        <button type="submit" @*onclick="FormEdit(@Model.Subs)"*@ class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-primary" style="width:150px">Go Back</a>
+    </div>
+</form>
+
+@{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script src="/js/Products.js"></script>

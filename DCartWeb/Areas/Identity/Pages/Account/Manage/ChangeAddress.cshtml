@@ -1,0 +1,74 @@
+﻿@page
+@model ChangeAddressModel
+@{
+    ViewData["Title"] = "Manage Address";
+    ViewData["ActivePage"] = ManageNavPages.ChangeAddress;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<h1>Hello from addresses</h1>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            @if (Model.Address != null)
+            {
+                <input asp-for="Input.UserId" type="hidden" value="@Model.Input.UserId" />
+            }
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                @if (Model.Address != null)
+                {
+
+                    <input asp-for="Input.StreetAddress" class="form-control" value="@Model.Input.StreetAddress" />
+                }
+                else{
+                    <input asp-for="Input.StreetAddress" class="form-control" />
+                }
+                <label asp-for="Input.StreetAddress" class="form-label"></label>
+                <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                @if (Model.Address != null)
+                {
+                    <input asp-for="Input.City" class="form-control" value="@Model.Input.City" />
+                }
+                else
+                {
+                    <input asp-for="Input.City" class="form-control" />
+                }
+                <label asp-for="Input.City" class="form-label"></label>
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                @if (Model.Address != null)
+                {
+                    <input asp-for="Input.ZipCode" class="form-control" value="@Model.Input.ZipCode" />
+                }
+                else
+                {
+                    <input asp-for="Input.ZipCode" class="form-control" />
+                }
+                <label asp-for="Input.ZipCode" class="form-label"></label>
+                <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
+            </div>
+            @if (Model.Address != null)
+            {
+                <button id="change-email-button" type="submit" asp-page-handler="ChangeAddress" class="w-100 btn btn-lg btn-primary">Change Address</button>
+            }
+            else
+            {
+                <button id="change-email-button" type="submit" asp-page-handler="AddAddress" class="w-100 btn btn-lg btn-primary">Change Address</button>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

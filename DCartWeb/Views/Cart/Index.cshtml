@@ -1,0 +1,131 @@
+﻿@using DCartWeb.Models.Carts
+@model Cart
+
+
+
+@{
+    decimal num = 0;
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Cart List
+            </h2>
+        </div>
+    </div>
+
+    <br />
+    <form method="post" id="content-post">
+        @if (Model == null)
+        {
+            <h2 class="text-danger">Sorry, you haven't ordered anything yet</h2>
+            <h2 class="text-danger">Please login to place an order if you are not</h2>
+        }
+        else
+        {
+            <div id="parent">
+
+                @foreach (var item in Model.CartItems)
+                {
+
+
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                @if (item.PictureUrl != null)
+                                {
+                                    <img id="ProductPicture" style="width:350px;width:300px; object-fit:cover" src="@item.PictureUrl">
+                                }
+                                else
+                                {
+                                    <img id="ProductPicture" style="width:350px;width:300px; object-fit:cover" src="" alt="No Picture">
+                                }
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row" id="append">
+
+                                        <h5 class="col-6">Product Name:</h5>
+                                        <h5 id="content-name" class="card-title col-6">@item.Name</h5>
+
+
+                                        <h5 class="col-6">Product Price:</h5>
+                                        <p id="content-price" class="card-text col-6">@item.Price.ToString("c")</p>
+
+
+                                        <h5 class="col-6">Total Price:</h5>
+                                        <p id="content-totalPrice" class="card-text col-6">@((item.Price * item.QuantityInCart).ToString("c"))</p>
+
+                                        <h5 class="col-6">Quantity In Cart:</h5>
+                                        <p id="content-quantityInCart" class="card-text col-6">@item.QuantityInCart</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        @*<button asp-controller="Cart" asp-action="Increase" asp-route-id="@item.Id" id="buttonIncrease" class="btn btn-secondary">Add</button>*@
+                        <button onclick="ButtonIncrease(@item.Id)" id="buttonIncrease" class="btn btn-secondary" value="@item.Id">Add</button>
+
+                        @if (item.QuantityInCart >= 2)
+                        {
+
+                            @*<button asp-controller="Cart" asp-action="Decrease" asp-route-id="@item.Id" class="btn btn-primary">Decrease</button>*@
+                            <button onclick="ButtonDecrease(@item.Id)" id="buttonDecrease" class="btn btn-primary" value="@item.Id">Decrease</button>
+
+                        }
+                        @*<button asp-controller="Cart" asp-action="Delete" id="buttonDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</button>*@
+                        <button onclick="ButtonDelete(@item.Id)" id="buttonDelete" class="btn btn-danger" value="@item.Id">Delete</button>
+
+                    </div>
+
+                }
+            </div>
+
+
+            num = Model.CartItems.Sum(x => x.QuantityInCart * x.Price);
+
+            <table class="mt-5 table table-bordered table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Total Price</th>
+                        <th>Continue Shopping</th>
+                        <th>Check Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="total-price">@num.ToString("c")</td>
+                        <td>
+                            <button id="continue-shopping" asp-controller="Home" asp-action="Index" style="width:200px;" class="btn btn-secondary">Continue Shopping</button>
+
+                        </td>
+                        <td>
+
+                            <button id="checkout-button" asp-controller="Stripe" asp-action="AddToStripe" asp-route-id="@Model.Id" style="width:200px;" class="btn btn-secondary">Check Out</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        }
+
+        <br />
+
+        <br />
+        <br />
+        @if (Model == null)
+        {
+            <h3 class="text-primary">Please add some products for your order to be able to check out!</h3>
+        }
+
+    </form>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="/js/ButtonManipulations.js"></script>

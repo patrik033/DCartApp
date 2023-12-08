@@ -1,0 +1,58 @@
+﻿@using DCartWeb.Models.Products
+@model IEnumerable<Product>
+
+
+
+<div class="row pb-3">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12 p-1" style="border:1px solid #008cba; border-radius: 5px;">
+                    <div class="card">
+
+
+                        @if (product.PosterImageUrl != null)
+                        {
+                            <img id="profilePicture" class="img-fluid" style="height:200px; width:200px;" src="/@product.PosterImageUrl">
+                        }
+                        else
+                        {
+                            <img id="profilePicture" class="img-fluid" style="height:200px; width:200px;" src="" alt="No Image">
+
+                        }
+                       @* @if (product.PosterImageUrl != null)
+                        {
+                            <img src="/@product.PosterImageUrl" class="img-fluid card-img-top" style="height:350px;" alt="empty">
+                        }
+                        else
+                        {
+                            <img src="" class="img-fluid card-img-top" style="height:350px;" alt="No Picture">
+                        }*@
+
+
+                        <div class="card-body">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-primary">@product.ProductName</p>
+                                <p class="card-title text-info">by <b>@product.DateAdded</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p>List Price: <strike><b>$@product.ProductPrice.ToString("0.00")</b></strike></p>
+                            </div>
+                            <div class="pl-1">
+                                <p>As low as: <b>$@product.ProductPrice.ToString("0.00")</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@product.Id">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<a asp-controller="Home" asp-action="Index" style="width:150px;" class="btn btn-primary">Go Back</a>

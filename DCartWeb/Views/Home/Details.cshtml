@@ -1,0 +1,71 @@
+﻿@using DCartWeb.Models.Products
+@model Product
+
+
+
+
+<form method="post" asp-controller="Cart" asp-action="AddToCart">
+    <input hidden asp-for="Id" id="Typical" />
+    <div class="card  container pt-4">
+        <div class="card-header bg-primary text-light ml-0  row ">
+            <div class="col-12 col-md-6">
+                <h1 class="text-white-50">@Model.ProductName</h1>
+            </div>
+            <div class="col-12 col-md-6 text-end pt-4">
+            </div>
+        </div>
+        <div class="card-body row container">
+            <div class="container rounded p-2">
+                <div class="row">
+                    <div class="col-8 col-lg-8">
+                        <div class="row pl-2">
+                            <div class="col-4 text-primary"><h4>Product Price:</h4></div>
+                            <h5 class="text-muted pb-2" id="product-price">@Model.ProductPrice.ToString("c")</h5>
+                        </div>
+
+
+                        <div class="row pl-2">
+                        </div>
+                        <div class="row pl-2">
+
+                            <div class="col-4 text-primary"><h4>Products In Stock:</h4></div>
+                            <h4 class="text-muted pb-2 col-3">@Model.QuantityInStock</h4>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-4 col-lg-3 offset-lg-1 ">
+                        @if (Model.PosterImageUrl != null)
+                        {
+                            <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="/@Model.PosterImageUrl">
+                        }
+                        else
+                        {
+                            <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="" alt="No Picture">
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-12 col-md-6 pb-1">
+                    <a class="btn btn-success form-control " style="height:50px;" asp-action="Index">Back to Home</a>
+                </div>
+                @if (Model.QuantityInStock > 0)
+                {
+
+                    <div class="col-12 col-md-6 pb-1">
+                        <button asp-controller="Cart" asp-action="AddProductToCart" asp-route-id="@Model.Id" class="btn btn-primary form-control" style="height:50px;" id="add">Add to Cart</button>
+                    </div>
+                }
+                else{
+                    <h3>Sorry We're out of stock for this product</h3>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+

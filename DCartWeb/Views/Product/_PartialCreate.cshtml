@@ -1,0 +1,70 @@
+﻿@using DCartWeb.Models.Products
+@using DCartWeb.Models.ViewModels
+@model ProductViewModel
+
+
+@{
+    Layout = "";
+}
+<form method="post"  enctype="multipart/form-data" id="my-form" >
+    <div asp-validation-summary="All"></div>
+    <input asp-for="Subs.DateAdded" type="hidden" value="@DateTime.UtcNow" />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Product</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Subs.ProductName"></label>
+            <input asp-for="Subs.ProductName" type="text" id="productName" class="form-control" data-val-required="Name is required." />
+            <span asp-validation-for="Subs.ProductName" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Subs.PosterImageUrl"></label>
+            <input asp-for="Subs.PosterImageUrl" type="file" id="files" class="form-control" value="@Model.Subs.PosterImageUrl" />
+            <span asp-validation-for="Subs.PosterImageUrl" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="mb-3">
+            <label asp-for="Subs.ProductPrice"></label>
+            <input asp-for="Subs.ProductPrice" id="productPrice" class="form-control" />
+            <span asp-validation-for="Subs.ProductPrice" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.QuantityInStock"></label>
+            <input asp-for="Subs.QuantityInStock" type="number" id="quantityInStock" class="form-control" />
+            <span asp-validation-for="Subs.QuantityInStock" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Subs.IsFeatured"></label>
+            <input type="checkbox" id="featured" asp-for="Subs.IsFeatured" />
+
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.SubCategoryId"></label>
+            <select asp-for="Subs.SubCategoryId" asp-items="Model.MainCategoryItems" id="subId" class="form-select">
+                <option disabled selected>-Select Category-</option>
+            </select>
+        </div>
+
+
+        <button type="submit" id="upload" class="btn btn-primary" onclick="FormSubmit()" style="width:150px">Create</button>
+        <a asp-controller="MainCategory" asp-action="Index" class="btn btn-primary" style="width:150px">Go Back</a>
+    </div>
+</form>
+
+@{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script src="/js/Products.js"></script>
+

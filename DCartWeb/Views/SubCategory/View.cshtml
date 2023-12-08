@@ -1,0 +1,91 @@
+﻿@using DCartWeb.Models.Products
+@model SubCategory
+
+
+
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <div class="col-4 col-lg-3 offset-lg-1 ">
+                @if (@Model.PosterImageUrl != null)
+                {
+                    <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="@Model.PosterImageUrl">
+                }
+                else
+                {
+                    <img id="profilePicture" class="img-fluid rounded" style="height:200px;" src="" alt="No Image">
+
+                }
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DateAdded"></label>
+                    <input asp-for="DateAdded" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DateUpdated"></label>
+                    <input asp-for="DateUpdated" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<h2>Products</h2>
+<form method="post" id="post-method">
+
+    @foreach (var item in Model.Products)
+    {
+
+
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    @if (item.PosterImageUrl != null)
+                    {
+                        <img src="/@item.PosterImageUrl" class="img-fluid rounded-start" style="width:300px;">
+                    }
+                    else
+                    {
+                        <img src="" class="img-fluid rounded-start" alt="No Picture" style="width:300px;">
+
+                    } 
+
+
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Name: @item.ProductName</h5>
+                        <p class="card-text">Date Added: @item.DateAdded</p>
+                        <p class="card-text">Product Price: @item.ProductPrice</p>
+                        <p class="card-text">Quantity In Stock: @item.QuantityInStock</p>
+                        <p class="card-text">IsFeatured: @item.IsFeatured</p>
+
+                        @if (item.DateUpdated != null)
+                        {
+                            <p class="card-text"><small class="text-muted">Last updated @item.DateUpdated</small></p>
+                        }
+                        else
+                        {
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</form>
+
+
+<a asp-controller="SubCategory" asp-action="Index" class="btn btn-secondary" style="width:150px">
+    Back to List
+</a>

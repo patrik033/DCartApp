@@ -1,0 +1,64 @@
+﻿@using DCartWeb.Models.Carts
+@model Cart
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category List
+            </h2>
+        </div>
+    </div>
+
+    <br />
+    <form method="post">
+        @if (Model == null)
+        {
+            <h2 class="text-danger">Sorry, you haven't ordered anything yet</h2>
+        }
+        else
+        {
+            @foreach (var item in Model.CartItems)
+            {
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="/@item.PictureUrl" class="img-fluid rounded-start" style="width:300px;" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Name: @item.Name</h5>
+                                <p class="card-text">Product Price: @item.Price</p>
+                                <p class="card-text">Quantity In Stock: @item.QuantityInStock</p>
+                                <p class="card-text">Quantity In Order: @item.QuantityInCart</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        <button asp-controller="Cart" asp-action="Increase" asp-route-id="@item.Id" class="btn btn-secondary">Add</button>
+
+                        @if (item.QuantityInCart >= 2)
+                        {
+
+                            <button asp-controller="Cart" asp-action="Decrease" asp-route-id="@item.Id" class="btn btn-primary">Decrease</button>
+                        }
+                        <button asp-controller="Cart" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            }
+        }
+        <br />
+        <div class="row">
+                <h3 class="text-bg-info">Please Click on the link if you want to continue shopping</h3>
+                <button asp-controller="Home" asp-action="Index" style="width:200px;" class="btn btn-secondary">Continue Shopping</button>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+                <h3 class="text-bg-info">Please Click on the link if you want to check out</h3>
+                <button asp-controller="CheckOut" asp-action="CheckAuthenticationState" style="width:200px;" class="btn btn-secondary">Check Out</button>
+        </div>
+    </form>
+</div>

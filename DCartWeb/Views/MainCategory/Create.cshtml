@@ -1,0 +1,32 @@
+﻿@using DCartWeb.Models.Products
+@model MainCategory
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="DateAdded" type="hidden" value="@DateTime.UtcNow" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Main Category</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PosterImageUrl"></label>
+            <input asp-for="PosterImageUrl" type="file" class="form-control" value="@Model.PosterImageUrl" id="posterImageUrl" />
+            <span asp-validation-for="PosterImageUrl" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="MainCategory" asp-action="Index" class="btn btn-primary" style="width:150px">Go Back</a>
+    </div>
+</form>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+

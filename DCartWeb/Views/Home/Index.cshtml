@@ -1,0 +1,207 @@
+﻿@using DCartWeb.Models.Products
+@model IEnumerable<Product>
+
+
+<section class="pb-3">
+
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <div class="container">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active text-white" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item text-centered active" data-bs-interval="5000">
+                            <img src="/Images/Categories/electronics.jpg" class="d-block img-fluid " alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                            </div>
+                        </div>
+                        <div class="carousel-item " data-bs-interval="5000">
+                            <img src="/Images/Categories/furniture.jpg" class="d-block img-fluid" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval=" 5000">
+                            <img src="/Images/Categories/toys.jpg" class="d-block img-fluid" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="home-icons" class="py-5 " style="background:#c3f9ff">
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-4 mb-4 text-center">
+                <i class="fas fa-solid fa-truck fa-3x mb-2"></i>
+                <h3>Deliveries</h3>
+                <p>Always fast delivery to a pick up location close by or home delivery</p>
+            </div>
+            <div class="col-md-4 mb-4 text-center">
+                <i class="fas fa-cloud fa-3x mb-2"></i>
+                <h3>Sending Data</h3>
+                <p>We wont share your data</p>
+            </div>
+            <div class="col-md-4 mb-4 text-center">
+                <i class="fas fa-cart-plus fa-3x mb-2"></i>
+                <h3>Making Money</h3>
+                <p>If you can find a better price somewhere else we will match it!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact-form" class="p-4 bg-dark text-white">
+    <div class="container">
+        <h2 class="text-center">Featured Products</h2>
+    </div>
+</section>
+<section style="background:#f8f8ff">
+
+    <form method="post">
+
+        <div class="product-layout d-flex flex-wrap justify-content-evenly">
+            @foreach (var item in Model)
+            {
+                <div class="card mb-3 pt-3 ps-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="/@item.PosterImageUrl" class="img-fluid rounded-start" style="width:200px;" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-text ps-5 " style="width: 400px;">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla facilis, sequi excepturi, quisquam, dignissimos
+                                molestiae dicta dolore dolores quas vel sunt placeat tempora expedita suscipit.
+                            </h5>
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        <div class="row">
+                            <div class="col-6">
+                                <h1 class="card-title " style="max-width:300px;">@item.ProductName</h1>
+                                @if (item.DateUpdated == null)
+                                {
+                                    <small class="text-muted">Last Updated 2019/12/20</small>
+                                }
+                                else
+                                {
+                                    <small class="text-muted">Last Updated @item.DateUpdated</small>
+                                }
+                            </div>
+                            <div class="col-6">
+                                <div class="button-group">
+
+                                    <i class="fa fa-shopping-cart"></i>
+                                    @if (item.QuantityInStock > 0)
+                                    {
+                                        <button asp-controller="Cart" asp-action="AddToCartFromView" asp-route-id="@item.Id" class="btn btn-primary form-control" style="max-width:150px;height:35px;">Add to Cart</button>
+                                    }
+                                    else
+                                    {
+                                        <h3>Sorry We're out of stock for this product</h3>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </form>
+</section>
+
+
+
+<section id="footer" style="background:#c9d4e6;color:#22599f;">
+    <div class="container">
+
+        <div class="row py-2">
+
+            <div class="footer-info col-4">
+                <img src="/Images/Content/trygg-ehandel.svg" style="max-width:45px;" />
+            </div>
+            <div class="footer-trygg col-4">
+            </div>
+            <div class="kundomdome col-4">
+                <div class="row">
+                    <div class="col-12">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="col-12">
+                        <br />
+                        <span>Reviews: 9.2 / 10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="leveranser pb-2">
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="postnord mx-5 my-3">
+                <img src="/Images/Content/postnord.png" style="max-width:300px;max-height:60px;" />
+            </div>
+
+
+            <div class="stripe mx-5 my-3">
+                <img src="/Images/Content/logo-stripe.png" style="max-width:300px;max-height:60px;" />
+            </div>
+            <div class="dhl mx-5 my-3">
+                <img src="/Images/Content/dhl.png" style="max-width:300px;height:60px;" />
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact-form" class="p-4 bg-dark text-white">
+    <div class="container">
+        <h2 class="text-center">Contact Us</h2>
+    </div>
+</section>
+
+<section class="py-3" style="background:#22599f;color:#fff;">
+    <div class="d-flex flex-wrap justify-content-center">
+
+        <h4 class="mx-5">Address: some street in Eskilstuna,sweden</h4>
+        <h4 class="mx-5">Email: test@mail.se</h4>
+        <h4 class="mx-5">Phone: 1234567890</h4>
+    </div>
+</section>
+
+
+<div class="mb-5 mt-5"></div>
+
+
+

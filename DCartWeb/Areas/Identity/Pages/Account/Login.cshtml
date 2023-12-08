@@ -1,0 +1,81 @@
+﻿@page
+@model LoginModel
+
+
+
+<link rel="stylesheet" href="~/css/special.css" asp-append-version="true" />
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 mx-auto p-0">
+            <div class="">
+                <div class="login-box">
+                    <div class="login-snip">
+                        <label class="tab text-white">Login</label>
+
+                        <div class="login-space">
+                            <form form id="account" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="login">
+                                    <div class="group">
+                                        <input asp-for="Input.Email" class="input" placeholder="Enter your username" />
+                                        <label asp-for="Input.Email" type="text" class="label" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="group">
+                                        <input asp-for="Input.Password" id="pass" type="password" class="input" data-type="password" placeholder="Enter your password">
+                                        <label asp-for="Input.Password" type="text" class="label"/>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div>
+                                        <div class="checkbox">
+                                            <label asp-for="Input.RememberMe" class="form-label text-white">
+                                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="group">
+                                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                                    </div>
+                                    <div class="hr"></div>
+                                    <div class="foot">
+                                        <p>
+                                            <a id="forgot-password" asp-page="./ForgotPassword" class="text-white">Forgot your password?</a>
+                                        </p>
+                                        <p>
+
+                                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-white">Register as a new user</a>
+                                        </p>
+                                        <p>
+                                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-white">Resend email confirmation</a>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+                    }

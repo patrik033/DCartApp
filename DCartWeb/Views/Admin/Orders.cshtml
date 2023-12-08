@@ -1,0 +1,71 @@
+﻿@using DCartWeb.Models.Orders
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@*@model IPagedList<Order>*@
+@model List<Order>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Order List
+            </h2>
+        </div>
+    </div>
+    <br />
+    <form method="post">
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped table-hover sortable">
+                <thead>
+                    <tr class="text-danger">
+                        <th>Link</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date Added</th>
+                        <th>Order State</th>
+                        <th>Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                <button asp-controller="Admin" asp-action="OrderResults" asp-route-id="@item.Id" style="width:200px;" class="btn btn-secondary" id="orders">Order Id: @item.Id</button>
+                            </td>
+                            <td>@item.CustomerFirstName</td>
+                            <td>@item.CustomerLastName</td>
+                            <td>@item.DateAdded</td>
+                            <td>@item.State</td>
+                            <td>
+                                    @item.TotalAmount.ToString("c")
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <br />
+    </form>
+
+    @*<nav class="float-left mb-3">
+        @Html.PagedListPager(Model, page => Url.Action("orders", new { page = page }), new PagedListRenderOptions()
+        {
+        ActiveLiElementClass = "active",
+        PageClasses = new[]{ "page-link"},
+        LiElementClasses=new[] { "page-item" },
+        UlElementClasses = new[] { "pagination","justify-content-center", "mt-3" },
+        LinkToNextPageFormat = "Next",
+        LinkToPreviousPageFormat = "Previous",
+        MaximumPageNumbersToDisplay = 5,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always
+        })
+    </nav>*@
+</div>

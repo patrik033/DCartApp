@@ -1,0 +1,75 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+.myBasket:hover {
+    background-color: #4285F4;
+    border-radius: 5px;
+    color: white;
+    text-align: left;
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+.navbarStyle {
+    background-color: #4e73df;
+    background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    height:100%;
+}
+
+.container {
+    height: 100%;
+    height: auto;
+    margin-bottom: -60px;
+    box-sizing: border-box;
+}
+
+    .container:after {
+        display: block;
+        content: '';
+        height: 60px;
+    }
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.space {
+    text-decoration: none;
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    height: 3px;
+    background-color: #666;
+    width:100%;
+}
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    /*remove the gap so it doesn't close*/
+}

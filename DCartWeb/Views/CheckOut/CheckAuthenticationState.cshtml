@@ -1,0 +1,27 @@
+﻿
+<form method="post">
+
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-danger">
+                    Sorry! You muse be logged in to check out an order!
+                </h2>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <h3 class="text-bg-info">Please Click on the link if you want to login</h3>
+            <button asp-area="Identity" asp-page="/Account/Login" style="width:200px;" class="btn btn-secondary">Login</button>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <h3 class="text-bg-info">Please Click on the link if you want to go back</h3>
+            <button asp-controller="Home" asp-action="Index" style="width:200px;" class="btn btn-secondary">Go Back</button>
+        </div>
+    </div>
+</form>
+

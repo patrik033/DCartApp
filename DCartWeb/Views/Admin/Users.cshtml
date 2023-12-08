@@ -1,0 +1,52 @@
+﻿@using DCartWeb.Models.Users
+
+@model List<DCartWeb.Models.Users.User>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Users List
+            </h2>
+        </div>
+    </div>
+    <br />
+    <form method="post">
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped table-hover sortable">
+                <thead>
+                    <tr class="text-danger">
+                        <th>Update</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                        <th>Date Added</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <button asp-controller="Admin" asp-action="ChangeRole" asp-route-id="@item.Id" style="width:200px;" class="btn btn-secondary">@item.Id</button>
+                            </td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.Email</td>
+                            <td>@item.DateAdded</td>
+
+                            @*<td>@item.Address.City</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <br />
+    </form>
+</div>

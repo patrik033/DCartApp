@@ -1,0 +1,56 @@
+﻿@using DCartWeb.Models.Products
+@model IEnumerable<MainCategory>
+
+<h1>Main Category</h1>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category List
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="MainCategory" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp;
+                Create New Category
+            </a>
+        </div>
+    </div>
+
+    <br />
+    <form method="post">
+
+        @foreach (var item in Model)
+        {
+
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="/@item.PosterImageUrl" class="img-fluid rounded-start" style="width:400px;" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name: @item.Name</h5>
+                            <p class="card-text">Date Added: @item.DateAdded</p>
+
+                            @if (item.DateUpdated != null)
+                            {
+                                <p class="card-text"><small class="text-muted">Last updated @item.DateUpdated</small></p>
+                            }
+                            else
+                            {
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-success">
+                    <button asp-controller="MainCategory" asp-action="View" asp-route-id="@item.Id" class="btn btn-secondary">View</button>
+                    <button asp-controller="MainCategory" asp-action="EditView" asp-route-id="@item.Id" class="btn btn-primary">Edit</button>
+                    <button asp-controller="MainCategory" asp-action="DeleteView" asp-route-id="@item.Id" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        }
+    </form>
+</div>

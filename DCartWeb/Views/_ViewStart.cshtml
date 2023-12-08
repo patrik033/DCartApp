@@ -1,0 +1,11 @@
+﻿@{
+    string contollerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    if (contollerName == "Admin" || contollerName == "Product" || contollerName == "MainCategory" || contollerName == "SubCategory")
+    {
+        Layout = "_AdminLayout";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}

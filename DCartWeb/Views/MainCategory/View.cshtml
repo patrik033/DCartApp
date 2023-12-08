@@ -1,0 +1,35 @@
+﻿@using DCartWeb.Models.Products
+@model MainCategory
+
+
+
+<div class="border p-3 mt-4">
+    <div class="row pb-2">
+        <h2 class="text-primary">Main Category</h2>
+        <hr />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="DateAdded"></label>
+        <input asp-for="DateAdded" disabled class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="DateUpdated"></label>
+        <input asp-for="DateUpdated" disabled class="form-control" />
+    </div>
+    <h2 class="text-danger">Sub Categories:</h2>
+    @foreach (var item in Model.SubCategories)
+    {
+        <div class="mb-3">
+            <label asp-for="@item.Name"></label>
+            <input asp-for="@item.Name" disabled class="form-control" />
+        </div>
+    }
+    <a asp-controller="MainCategory" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        Back to List
+    </a>
+</div>

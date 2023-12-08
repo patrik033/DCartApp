@@ -1,0 +1,27 @@
+﻿@using DCartWeb.Models.Users
+@model User
+
+<form method="post">
+    <table class="mt-5 table table-bordered table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last name</th>
+                <th>User Name</th>
+                <th>Go Back</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.FirstName</td>
+                <td>@Model.LastName</td>
+                <td>@Model.UserName</td>
+                <td>
+                    <button id="continue-shopping" asp-controller="Admin" asp-action="GetAllUsers" style="width:200px;" class="btn btn-secondary">Go Back</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

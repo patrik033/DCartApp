@@ -1,0 +1,72 @@
+﻿@using DCartWeb.Models.Products
+@model List<Product>
+
+
+@{
+    Layout = "";
+}
+
+
+    
+
+        @foreach (var item in Model)
+        {
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        @*@if (item.ProductPicture != null)
+                    {
+                    <img src=" data:image/*;base64,@(Convert.ToBase64String(item.ProductPicture))" class="img-fluid rounded-start" style="width:300px;" alt="...">
+                    }*@
+
+                        <img src="@item.PosterImageUrl" class="img-fluid rounded-start" style="width:300px;">
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Name: @item.ProductName</h5>
+                            <p class="card-text">Date Added: @item.DateAdded</p>
+                            <p class="card-text">Product Price: @item.ProductPrice</p>
+                            <p class="card-text">Quantity In Stock: @item.QuantityInStock</p>
+                            <p class="card-text">IsFeatured: @item.IsFeatured</p>
+
+                            @if (item.DateUpdated != null)
+                            {
+                                <p class="card-text"><small class="text-muted">Last updated @item.DateUpdated</small></p>
+                            }
+                            else
+                            {
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-success">
+                    @*<button asp-controller="Product" asp-action="View" asp-route-id="@item.Id" class="btn btn-secondary">View</button>*@
+                    <button onclick="View(@item.Id)" class="btn btn-secondary">View</button>
+
+                    <button asp-controller="Product" asp-action="EditView" asp-route-id="@item.Id" class="btn btn-primary">Edit</button>
+                    <button asp-controller="Product" asp-action="DeleteView" asp-route-id="@item.Id" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        }
+
+  
+    @* <nav class="float-left mb-3">
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page = page }), new PagedListRenderOptions()
+    {
+    ActiveLiElementClass = "active",
+    PageClasses = new[]{ "page-link"},
+    LiElementClasses=new[] { "page-item" },
+    UlElementClasses = new[] { "pagination","justify-content-center", "mt-3" },
+    LinkToNextPageFormat = "Next",
+    LinkToPreviousPageFormat = "Previous",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+    DisplayLinkToNextPage = PagedListDisplayMode.Always
+    })
+    </nav>*@
+
+@{
+    <partial name="_ValidationScriptsPartial" />
+}

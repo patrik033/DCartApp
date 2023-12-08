@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DCartWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DCartWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://kit.fontawesome.com/d6e45c33c3.js" crossorigin="anonymous"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+</head>
+<body>
+    <header>
+        <section id="top-nav" class="mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white  box-shadow navbarStyle">
+                <div class="container-fluid">
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between me-5 navbar-expand-md">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="dropdown">
+                                @if (User.Identity.IsAuthenticated != false)
+                                {
+                                    <a class="dropdown-toggle nav-link text-white" style="font-size:1.5rem;" data-toggle="dropdown" asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-toggle nav-link text-white" style="font-size:1.5rem;" data-toggle="dropdown" asp-area="Identity" asp-page="/Account/Login">My Account</a>
+
+                                }
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-inner">
+                                        <ul class="list-unstyled">
+                                            <partial name="_LoginPartial" />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle nav-link text-white" style="font-size:1.5rem;" data-toggle="dropdown" asp-controller="Admin" asp-action="Index">Admin</a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-inner">
+                                            <ul class="list-unstyled">
+
+                                                <li class="nav-item myBasket">
+                                                    <a class="dropdown-item" style="font-size:1.5rem;" asp-area="" asp-controller="Admin" asp-action="Index">Index</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        <section id="logo-section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div id="logo" class="mb-3">
+                            <a href="">
+                                <img src="/Images/logo.png" alt="logo for your store" class="img-fluid" style="max-height:100px;" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div id="searc" class="input-group">
+                            <input type="text" name="search" placeholder="Search" class="form-control input-lg" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-lg">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div id="cart" class="btn-group btn-block">
+
+                            <form method="post">
+                                <button data-toggle="dropdown" data-loading-text="Loading..." class="btn btn-dark btn-block btn-lg dropdown-toggle" asp-area="" asp-controller="Cart" asp-action="Index">
+                                    <i class="fa fa-shopping-cart">
+                                    </i>
+                                    <span id="cart-total" class="text-white">Go To Shopping Cart</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bottom-nav">
+
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 navbarStyle">
+                <div class="container-fluid">
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between me-5 navbar-expand-md">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item myBasket">
+                                <a class="nav-link text-white" style="font-size:1.5rem;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle nav-link text-white" style="font-size:1.5rem;" data-toggle="dropdown" asp-controller="Home" asp-action="SubIndex" asp-route-id="1">Electronics</a>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-inner">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a class="dropdown-item" style="font-size:1.5rem;" asp-controller="Home" asp-action="Product" asp-route-id="1">Computers</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" style="font-size:1.5rem;" asp-controller="Home" asp-action="Product" asp-route-id="2">Tvs</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle nav-link text-white" style="font-size:1.5rem;" data-toggle="dropdown" asp-controller="Home" asp-action="SubIndex" asp-route-id="2">Furnitures</a>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-inner">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a class="dropdown-item" style="font-size:1.5rem;" asp-controller="Home" asp-action="Product" asp-route-id="3">Chairs</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" style="font-size:1.5rem;" asp-controller="Home" asp-action="Product" asp-route-id="4">Tables</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle nav-link text-white" style="font-size:1.5rem;" data-toggle="dropdown" asp-controller="Home" asp-action="SubIndex" asp-route-id="3">Toys</a>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-inner">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a class="dropdown-item" style="font-size:1.5rem;" asp-controller="Home" asp-action="Product" asp-route-id="5">Action Figures</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" style="font-size:1.5rem;" asp-controller="Home" asp-action="Product" asp-route-id="6">Dolls</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </section>
+    </header>
+
+
+
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            <partial name="_Notify" />
+
+            <div class="render">
+
+                @RenderBody()
+            </div>
+
+        </main>
+    </div>
+
+
+    <footer class="footer" style="min-height:80px;">
+        &copy; 2022 - DCartWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

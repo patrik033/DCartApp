@@ -1,0 +1,39 @@
+﻿@using DCartWeb.Models.ViewModels
+@model SubCategoryViewModel
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="Subs.DateAdded" value="@DateTime.UtcNow" type="hidden" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Sub Category</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Subs.Name"></label>
+            <input asp-for="Subs.Name" class="form-control" />
+            <span asp-validation-for="Subs.Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.PosterImageUrl"></label>
+            <input asp-for="Subs.PosterImageUrl" type="file" class="form-control" value="@Model.Subs.PosterImageUrl" id="posterImageUrl" />
+            <span asp-validation-for="Subs.PosterImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Subs.MainCategoryId"></label>
+            <select asp-for="Subs.MainCategoryId" asp-items="Model.MainCategoryItems" class="form-select">
+                <option disabled selected>-Select Category-</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="SubCategory" asp-action="Index" class="btn btn-primary" style="width:150px">Go Back</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

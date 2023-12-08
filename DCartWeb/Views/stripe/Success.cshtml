@@ -1,0 +1,95 @@
+﻿@using DCartWeb.Models.Orders
+@model List<OrderItem>
+
+    @{
+        decimal num = 0;
+    }
+
+<div class="container p-3" id="str">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category List
+            </h2>
+        </div>
+    </div>
+
+    <br />
+    <form method="post" id="content-post">
+        @if (Model == null)
+        {
+            <h2 class="text-danger">Sorry, you haven't ordered anything yet</h2>
+        }
+        else
+        {
+            <h1 class="text-success">
+                Thanks for the purchase, welcome back again!
+            </h1>
+            @foreach (var item in Model)
+            {
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            @if (item.PictureUrl != null)
+                            {
+                                <img id="ProductPicture" style="width:350px;width:300px; object-fit:cover" src="/@item.PictureUrl">
+
+                            }
+                            else
+                            {
+                                <img id="ProductPicture" style="width:350px;width:300px; object-fit:cover" src="" alt="No Picture">
+                            }
+
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+
+
+
+                                <h5 class="col-6">Product Name:</h5>
+                                <h5 id="content-name" class="card-title col-6">@item.Name</h5>
+
+
+                                <h5 class="col-6">Product Price:</h5>
+                                <p id="content-price" class="card-text col-6">@item.Price.ToString("c")</p>
+
+
+                                <h5 class="col-6">Total Price:</h5>
+                                <p id="content-totalPrice" class="card-text col-6">@((item.Price * item.QuantityInCart).ToString("c"))</p>
+
+                                <h5 class="col-6">Quantity In Cart:</h5>
+                                <p id="content-quantityInCart" class="card-text col-6">@item.QuantityInCart</p>
+
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                num = Model.Sum(x => x.QuantityInCart * x.Price);
+            }
+
+            
+
+            <table class="mt-5 table table-bordered table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="total-price">@num.ToString("c")</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        <br />
+        <div class="row">
+            <h3 class="text-bg-info">Please Click on the link if you want to continue shopping</h3>
+            <button asp-controller="Home" asp-action="Index" style="width:200px;" class="btn btn-secondary">Continue Shopping</button>
+        </div>
+        <br />
+        <br />
+    </form>
+</div>
